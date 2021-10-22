@@ -5,8 +5,8 @@ namespace TAC
 {
     abstract class Entity
     {
-        protected float X { get; set; }
-        protected float Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
         protected int Health { get; set; }
         protected int MaxHealth { get; set; }
 
@@ -38,9 +38,9 @@ namespace TAC
 
         public abstract void tick();
 
-        public void render(SpriteBatch spriteBatch)
+        public void render(SpriteBatch spriteBatch, int gameCameraOffsetX, int gameCameraOffsetY)
         {
-            spriteBatch.Draw(Assets.characters, new Rectangle((int)X, (int)Y, 32, 32), textureSubRect, Color.White);
+            spriteBatch.Draw(Assets.characters, new Rectangle((int)X - gameCameraOffsetX, (int)Y - gameCameraOffsetY, 32, 32), textureSubRect, Color.White);
         }
     }
 }

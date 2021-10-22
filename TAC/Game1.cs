@@ -19,13 +19,13 @@ namespace TAC
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            gameState = new GameState();
+            
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            gameState = new GameState(_graphics.GraphicsDevice.Viewport.Width, _graphics.GraphicsDevice.Viewport.Height);
             base.Initialize();
         }
 

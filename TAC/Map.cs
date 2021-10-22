@@ -10,7 +10,8 @@ namespace TAC
     {
 
         private List<Tile> tiles = new List<Tile>();
-        private readonly int WIDTH, HEIGHT;
+        public int WIDTH { get; }
+        public int HEIGHT { get; }
 
         public Map(string file)
         {
@@ -41,10 +42,10 @@ namespace TAC
             
         }
 
-        public void render(SpriteBatch spriteBatch)
+        public void render(SpriteBatch spriteBatch, int gameCameraOffsetX, int gameCameraOffsetY)
         {
             foreach (Tile t in tiles) {
-                spriteBatch.Draw(Assets.tileMap, new Rectangle(t.X, t.Y, t.Width, t.Height), t.TextureSource, Color.White);
+                spriteBatch.Draw(Assets.tileMap, new Rectangle(t.X - gameCameraOffsetX, t.Y - gameCameraOffsetY, t.Width, t.Height), t.TextureSource, Color.White);
             }
         }
     }
