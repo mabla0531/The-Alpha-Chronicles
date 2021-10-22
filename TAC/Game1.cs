@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace TAC
 {
@@ -9,11 +9,17 @@ namespace TAC
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private Stack<State> states = new Stack<State>();
+        State gameState;
+        Texture2D tiles;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            gameState = new GameState();
         }
 
         protected override void Initialize()
@@ -25,14 +31,16 @@ namespace TAC
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(_graphics.GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            Assets.characters = Content.Load<Texture2D>("Character");
+            Assets.tileMap = Content.Load<Texture2D>("Map");
+            tiles = Content.Load<Texture2D>("Map");
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
+            gameState.tick();
 
             base.Update(gameTime);
         }
@@ -41,8 +49,11 @@ namespace TAC
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
 
+            gameState.render(_spriteBatch);
+
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }

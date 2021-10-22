@@ -1,29 +1,29 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace The_Alpha_Chronicles.States
+namespace TAC
 {
-    public class GameState : State
+    class GameState : State
     {
-        
-        private Player player;
-        private Map map;
+
+        private Entity Player1 { get; }
+        private Map map1 { get; }
 
         public GameState()
         {
-            map = new Map();
-            player = new Player();
+            map1 = new Map("map1.map");
+            Player1 = new Player();
         }
 
         public override void tick()
         {
-            map.tick();
-            player.tick();
+            Player1.tick();
         }
 
         public override void render(SpriteBatch spriteBatch)
         {
-            map.render(spriteBatch);
-            player.render(spriteBatch);
+            map1.render(spriteBatch);
+            Player1.render(spriteBatch);
         }
     }
 }
