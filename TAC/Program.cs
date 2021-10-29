@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TAC
+﻿namespace TAC
 {
     public static class Program
     {

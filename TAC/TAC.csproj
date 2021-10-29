@@ -88,9 +88,12 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="Animation.cs" />
     <Compile Include="Assets.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Handler.cs" />
+    <Compile Include="Items\Item.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="States\GameState.cs" />
     <Compile Include="Program.cs" />

@@ -19,7 +19,7 @@ namespace TAC
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            
+            Handler.game = this;
         }
 
         protected override void Initialize()

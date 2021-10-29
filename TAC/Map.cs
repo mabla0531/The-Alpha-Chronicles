@@ -18,11 +18,8 @@ namespace TAC
             string fileContent = File.ReadAllText(file);
             string[] tokens = fileContent.Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-            WIDTH  = int.Parse(tokens[0]);
+            WIDTH = int.Parse(tokens[0]);
             HEIGHT = int.Parse(tokens[1]);
-
-            Rectangle textureRect1 = new Rectangle(0, 0, 32, 32);   //TEMPORARY TEXTURE RECTANGLES, SYSTEM SHOULD BE UPDATED TO PUSH NEW STATIC TILE PROTOTYPES INSTEAD
-            Rectangle textureRect2 = new Rectangle(0, 32, 32, 32);
 
             int tokenNum = 2;
 
@@ -30,23 +27,42 @@ namespace TAC
             {
                 for (int x = 0; x < WIDTH; x++)
                 {
-                    tiles.Add(new Tile(x * 32, y * 32, 32, 32, (int.Parse(tokens[tokenNum]) == 1 ? textureRect1 : textureRect2), false));
+                    if (tokens[tokenNum] == "0")
+                    {
+                        tiles.Add(Tile.TileFromPrototype(Tile.grassTile, x * 32, y * 32));
+                    }
+                    else if (tokens[tokenNum] == "1")
+                    {
+                        tiles.Add(Tile.TileFromPrototype(Tile.wallTile, x * 32, y * 32));
+                    }
                     tokenNum++;
                 }
             }
-                
         }
 
         public void tick()
         {
-            
+
         }
 
         public void render(SpriteBatch spriteBatch, int gameCameraOffsetX, int gameCameraOffsetY)
         {
-            foreach (Tile t in tiles) {
+            foreach (Tile t in tiles)
+            {
                 spriteBatch.Draw(Assets.tileMap, new Rectangle(t.X - gameCameraOffsetX, t.Y - gameCameraOffsetY, t.Width, t.Height), t.TextureSource, Color.White);
             }
+        }
+
+        public Tile getTile(int x, int y)
+        {
+            foreach (Tile t in tiles)
+            {
+                if (new Rectangle(t.X, t.Y, t.Width, t.Height).Contains(new Point(x, y)))
+                {
+                    return t;
+                }
+            }
+            return new Tile();
         }
     }
 }

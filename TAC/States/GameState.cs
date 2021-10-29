@@ -8,13 +8,16 @@ namespace TAC
         private int gameCameraOffsetX, gameCameraOffsetY;
         private readonly int GAMEWINDOWWIDTH, GAMEWINDOWHEIGHT;
 
-        private Entity Player1 { get; }
-        private Map map1 { get; }
+        private Entity player { get; }
+        private Map map { get; }
 
         public GameState(int gameWindowWidth, int gameWindowHeight)
         {
-            map1 = new Map("map1.map");
-            Player1 = new Player();
+            map = new Map("map1.map");
+            player = new Player();
+
+            Handler.map = map;
+            Handler.player = player;
 
             GAMEWINDOWWIDTH = gameWindowWidth;
             GAMEWINDOWHEIGHT = gameWindowHeight;
@@ -22,29 +25,29 @@ namespace TAC
 
         public override void tick()
         {
-            Player1.tick();
+            player.tick();
 
             //DO GAMECAMERA CALCULATION
-            gameCameraOffsetX = (int)(Player1.X - (GAMEWINDOWWIDTH / 2));
-            gameCameraOffsetY = (int)(Player1.Y - (GAMEWINDOWHEIGHT / 2));
+            gameCameraOffsetX = (int)(player.X - (GAMEWINDOWWIDTH / 2));
+            gameCameraOffsetY = (int)(player.Y - (GAMEWINDOWHEIGHT / 2));
 
             if (gameCameraOffsetX < 0) //make sure the game camera isn't rendering blank space
                 gameCameraOffsetX = 0;
-            if (gameCameraOffsetX + GAMEWINDOWWIDTH > (map1.WIDTH * 32))
-                gameCameraOffsetX = (map1.WIDTH * 32) - GAMEWINDOWWIDTH;
+            if (gameCameraOffsetX + GAMEWINDOWWIDTH > (map.WIDTH * 32))
+                gameCameraOffsetX = (map.WIDTH * 32) - GAMEWINDOWWIDTH;
 
             if (gameCameraOffsetY < 0) //same as above, but for Y axis
                 gameCameraOffsetY = 0;
-            if (gameCameraOffsetY + GAMEWINDOWHEIGHT > (map1.HEIGHT * 32))
-                gameCameraOffsetY = (map1.HEIGHT * 32) - GAMEWINDOWHEIGHT;
+            if (gameCameraOffsetY + GAMEWINDOWHEIGHT > (map.HEIGHT * 32))
+                gameCameraOffsetY = (map.HEIGHT * 32) - GAMEWINDOWHEIGHT;
 
             Debug.WriteLine(gameCameraOffsetX + " " + gameCameraOffsetY);
         }
 
         public override void render(SpriteBatch spriteBatch)
         {
-            map1.render(spriteBatch, gameCameraOffsetX, gameCameraOffsetY);
-            Player1.render(spriteBatch, gameCameraOffsetX, gameCameraOffsetY);
+            map.render(spriteBatch, gameCameraOffsetX, gameCameraOffsetY);
+            player.render(spriteBatch, gameCameraOffsetX, gameCameraOffsetY);
         }
     }
 }
