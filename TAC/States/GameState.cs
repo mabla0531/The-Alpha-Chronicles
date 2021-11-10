@@ -1,31 +1,51 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TAC
 {
     class GameState : State
     {
-        private int gameCameraOffsetX, gameCameraOffsetY;
+        public static int gameCameraOffsetX, gameCameraOffsetY;
         private readonly int GAMEWINDOWWIDTH, GAMEWINDOWHEIGHT;
 
-        private Entity player { get; }
+        private Player player { get; }
         private Map map { get; }
+        private Chest chest1;
+
+        private List<Entity> entities;
+
+        private InfoPanel infoPanel;
 
         public GameState(int gameWindowWidth, int gameWindowHeight)
         {
             map = new Map("map1.map");
             player = new Player();
+            chest1 = new Chest(128, 128);
 
             Handler.map = map;
             Handler.player = player;
 
             GAMEWINDOWWIDTH = gameWindowWidth;
             GAMEWINDOWHEIGHT = gameWindowHeight;
+
+            infoPanel = new InfoPanel();
+
+            entities = new List<Entity>();
+            entities.Add(player);
+            entities.Add(chest1);
         }
 
         public override void tick()
         {
-            player.tick();
+            //SORT ENTITIES BY Y VALUE
+            entities = entities.OrderBy(e => e.Y).ToList();
+
+            //TICK ENTITIES
+            foreach (Entity e in entities)
+            {
+                e.tick();
+            }
 
             //DO GAMECAMERA CALCULATION
             gameCameraOffsetX = (int)(player.X - (GAMEWINDOWWIDTH / 2));
@@ -38,16 +58,20 @@ namespace TAC
 
             if (gameCameraOffsetY < 0) //same as above, but for Y axis
                 gameCameraOffsetY = 0;
-            if (gameCameraOffsetY + GAMEWINDOWHEIGHT > (map.HEIGHT * 32))
-                gameCameraOffsetY = (map.HEIGHT * 32) - GAMEWINDOWHEIGHT;
-
-            Debug.WriteLine(gameCameraOffsetX + " " + gameCameraOffsetY);
+            if (gameCameraOffsetY + (GAMEWINDOWHEIGHT - 128) > (map.HEIGHT * 32))
+                gameCameraOffsetY = (map.HEIGHT * 32) - (GAMEWINDOWHEIGHT - 128);
         }
 
         public override void render(SpriteBatch spriteBatch)
         {
-            map.render(spriteBatch, gameCameraOffsetX, gameCameraOffsetY);
-            player.render(spriteBatch, gameCameraOffsetX, gameCameraOffsetY);
+            map.render(spriteBatch);
+
+            foreach (Entity e in entities)
+            {
+                e.render(spriteBatch);
+            }
+
+            infoPanel.render(spriteBatch);
         }
     }
 }

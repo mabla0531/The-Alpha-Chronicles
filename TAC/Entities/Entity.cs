@@ -9,8 +9,8 @@ namespace TAC
         public float X { get; set; }
         public float Y { get; set; }
         public Rectangle CollisionBounds { get; set; }
-        protected int Health { get; set; }
-        protected int MaxHealth { get; set; }
+        public int Health { get; set; }
+        public int MaxHealth { get; set; }
 
         protected Rectangle textureSubRect;
 
@@ -56,9 +56,9 @@ namespace TAC
 
         public abstract void tick();
 
-        public virtual void render(SpriteBatch spriteBatch, int gameCameraOffsetX, int gameCameraOffsetY)
+        public virtual void render(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.characters, new Rectangle((int)X - gameCameraOffsetX, (int)Y - gameCameraOffsetY, 32, 32), textureSubRect, Color.White);
+            spriteBatch.Draw(Assets.characters, new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, 32, 32), textureSubRect, Color.White);
         }
     }
 }

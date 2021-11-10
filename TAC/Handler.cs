@@ -10,6 +10,6 @@ namespace TAC
     {
         public static Game1 game;
         public static Map map;
-        public static Entity player;
+        public static Player player;
     }
 }

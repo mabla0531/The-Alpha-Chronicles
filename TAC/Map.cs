@@ -45,11 +45,11 @@ namespace TAC
 
         }
 
-        public void render(SpriteBatch spriteBatch, int gameCameraOffsetX, int gameCameraOffsetY)
+        public void render(SpriteBatch spriteBatch)
         {
             foreach (Tile t in tiles)
             {
-                spriteBatch.Draw(Assets.tileMap, new Rectangle(t.X - gameCameraOffsetX, t.Y - gameCameraOffsetY, t.Width, t.Height), t.TextureSource, Color.White);
+                spriteBatch.Draw(Assets.tileMap, new Rectangle(t.X - GameState.gameCameraOffsetX, t.Y - GameState.gameCameraOffsetY, t.Width, t.Height), t.TextureSource, Color.White);
             }
         }
 
