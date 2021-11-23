@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            var factory = new MonoGame.Framework.GameFrameworkViewSource<Game1>();
+            var factory = new MonoGame.Framework.GameFrameworkViewSource<TAC_Game>();
             Windows.ApplicationModel.Core.CoreApplication.Run(factory);
         }
     }

@@ -1,11 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace TAC
 {
-    public class Game1 : Game
+    public class TAC_Game : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -13,7 +12,7 @@ namespace TAC
         private Stack<State> states = new Stack<State>();
         State gameState;
 
-        public Game1()
+        public TAC_Game()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -40,7 +39,7 @@ namespace TAC
             Assets.tileMap = Content.Load<Texture2D>("Map");
             Assets.items = Content.Load<Texture2D>("Items");
             Assets.minecraftFont12 = Content.Load<SpriteFont>("Minecraft12");
-            Assets.minecraftFont6 = Content.Load<SpriteFont>("Minecraft6");
+            Assets.minecraftFont24 = Content.Load<SpriteFont>("Minecraft6");
             Assets.chests = Content.Load<Texture2D>("Chests");
         }
 

@@ -99,11 +99,12 @@
     <Compile Include="Map.cs" />
     <Compile Include="States\GameState.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="TAC_Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\State.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="UI\InfoPanel.cs" />
+    <Compile Include="UI\StorageInventory.cs" />
     <Compile Include="UI\Tooltip.cs" />
   </ItemGroup>
   <ItemGroup>
