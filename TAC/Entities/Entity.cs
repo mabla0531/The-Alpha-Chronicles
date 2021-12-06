@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace TAC
 {
@@ -33,24 +34,47 @@ namespace TAC
             this.textureSubRect = textureSubRect;
         }
 
-        protected void move(float xMove, float yMove)
+        protected void moveX(float xMove)
         {
             //check collision with tiles before doing movement
 
-            if ((xMove < 0.0f && (!Handler.map.getTile((int)(X + xMove + CollisionBounds.X), (int)(Y + CollisionBounds.Y)).Solid &&
-                                  !Handler.map.getTile((int)(X + xMove + CollisionBounds.X), (int)(Y + CollisionBounds.Y + CollisionBounds.Height)).Solid)) ||
-                (xMove > 0.0f && (!Handler.map.getTile((int)(X + xMove + CollisionBounds.X + CollisionBounds.Width), (int)(Y + CollisionBounds.Y)).Solid &&
-                                  !Handler.map.getTile((int)(X + xMove + CollisionBounds.X + CollisionBounds.Width), (int)(Y + CollisionBounds.Y + CollisionBounds.Height)).Solid)))
+            if ((xMove < 0.0f && (Handler.map.getTile((int)(X + xMove + CollisionBounds.X), (int)(Y + CollisionBounds.Y)).Solid ||
+                                  Handler.map.getTile((int)(X + xMove + CollisionBounds.X), (int)(Y + CollisionBounds.Y + CollisionBounds.Height)).Solid)) ||
+                (xMove > 0.0f && (Handler.map.getTile((int)(X + xMove + CollisionBounds.X + CollisionBounds.Width), (int)(Y + CollisionBounds.Y)).Solid ||
+                                  Handler.map.getTile((int)(X + xMove + CollisionBounds.X + CollisionBounds.Width), (int)(Y + CollisionBounds.Y + CollisionBounds.Height)).Solid)))
             {
-                X += xMove;
+                return;
             }
-            if ((yMove < 0.0f && (!Handler.map.getTile((int)(X + CollisionBounds.X), (int)(Y + yMove + CollisionBounds.Y)).Solid &&
-                                  !Handler.map.getTile((int)(X + CollisionBounds.X + CollisionBounds.Width), (int)(Y + yMove + CollisionBounds.Y)).Solid)) ||
-                (yMove > 0.0f && (!Handler.map.getTile((int)(X + CollisionBounds.X), (int)(Y + yMove + CollisionBounds.Y + CollisionBounds.Height)).Solid &&
-                                  !Handler.map.getTile((int)(X + CollisionBounds.X + CollisionBounds.Width), (int)(Y + yMove + CollisionBounds.Y + CollisionBounds.Height)).Solid)))
+
+            Rectangle moveRect = new Rectangle((int)(X + CollisionBounds.X + xMove), (int)(Y + CollisionBounds.Y), CollisionBounds.Width, CollisionBounds.Height);
+            //check collision with entities before doing movement
+            foreach(Entity e in Handler.entities)
             {
-                Y += yMove;
+                if (e != this && new Rectangle((int)(e.X + e.CollisionBounds.X), (int)(e.Y + e.CollisionBounds.Y), e.CollisionBounds.Width, e.CollisionBounds.Height).Intersects(moveRect)) return;
             }
+
+            X += xMove;
+        }
+
+        protected void moveY(float yMove)
+        {
+            //check collision with tiles before doing movement
+            if ((yMove < 0.0f && (Handler.map.getTile((int)(X + CollisionBounds.X), (int)(Y + yMove + CollisionBounds.Y)).Solid ||
+                                  Handler.map.getTile((int)(X + CollisionBounds.X + CollisionBounds.Width), (int)(Y + yMove + CollisionBounds.Y)).Solid)) ||
+                (yMove > 0.0f && (Handler.map.getTile((int)(X + CollisionBounds.X), (int)(Y + yMove + CollisionBounds.Y + CollisionBounds.Height)).Solid ||
+                                  Handler.map.getTile((int)(X + CollisionBounds.X + CollisionBounds.Width), (int)(Y + yMove + CollisionBounds.Y + CollisionBounds.Height)).Solid)))
+            {
+                return;
+            }
+
+            Rectangle moveRect = new Rectangle((int)(X + CollisionBounds.X), (int)(Y + CollisionBounds.Y + yMove), CollisionBounds.Width, CollisionBounds.Height);
+            //check collision with entities before doing movement
+            foreach (Entity e in Handler.entities)
+            {
+                if (e != this && new Rectangle((int)(e.X + e.CollisionBounds.X), (int)(e.Y + e.CollisionBounds.Y), e.CollisionBounds.Width, e.CollisionBounds.Height).Intersects(moveRect)) return;
+            }
+
+            Y += yMove;
         }
 
         public abstract void tick();
@@ -58,6 +82,11 @@ namespace TAC
         public virtual void render(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Assets.characters, new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, 32, 32), textureSubRect, Color.White);
+        }
+
+        public virtual void postRender(SpriteBatch spriteBatch)
+        {
+
         }
     }
 }

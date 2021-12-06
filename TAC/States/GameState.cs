@@ -20,11 +20,11 @@ namespace TAC
         public GameState(int gameWindowWidth, int gameWindowHeight)
         {
             map = new Map("map1.map");
+            Handler.map = map;
             player = new Player();
+            Handler.player = player;
             chest1 = new Chest(128, 128);
 
-            Handler.map = map;
-            Handler.player = player;
 
             GAMEWINDOWWIDTH = gameWindowWidth;
             GAMEWINDOWHEIGHT = gameWindowHeight;
@@ -34,6 +34,7 @@ namespace TAC
             entities = new List<Entity>();
             entities.Add(player);
             entities.Add(chest1);
+            Handler.entities = entities;
         }
 
         public override void tick()
@@ -69,6 +70,11 @@ namespace TAC
             foreach (Entity e in entities)
             {
                 e.render(spriteBatch);
+            }
+            
+            foreach (Entity e in entities)
+            {
+                e.postRender(spriteBatch);
             }
 
             infoPanel.render(spriteBatch);

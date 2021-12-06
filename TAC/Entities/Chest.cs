@@ -67,7 +67,10 @@ namespace TAC
         public override void render(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Assets.chests, new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, 16, 16), textureSubRect, Color.White);
+        }
 
+        public override void postRender(SpriteBatch spriteBatch)
+        {
             if (new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, textureSubRect.Width, textureSubRect.Height).Contains(Mouse.GetState().Position) && !ShowingInventory)
             {
                 tooltip.render(spriteBatch, Mouse.GetState().X + 16, Mouse.GetState().Y + 16);

@@ -198,7 +198,8 @@ namespace TAC
                 yMove *= diagonalMoveCoefficient;
             }
             //FINALIZE MOVEMENT
-            move(xMove, yMove);
+            moveX(xMove);
+            moveY(yMove);
 
             //--------------TICK ANIMATION--------------
             if (xMove < 0.0f) //if left or diagonal left

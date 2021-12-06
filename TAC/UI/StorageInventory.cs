@@ -52,7 +52,7 @@ namespace TAC
             if (container.items.Count > 0)
                 spriteBatch.DrawString(Assets.minecraftFont12, container.items[itemNum].Name, new Vector2((int)(container.X + 16), (int)(container.Y + 32)), Color.LightGray);
             else
-                spriteBatch.DrawString(Assets.minecraftFont12, "EMPTY", new Vector2((int)(container.X + 16), (int)(container.Y + 32)), Color.LightGray);
+                spriteBatch.DrawString(Assets.minecraftFont12, "---EMPTY---", new Vector2((int)(container.X + 16), (int)(container.Y + 32)), Color.LightGray);
 
             if (itemNum < container.items.Count - 1)
                 spriteBatch.DrawString(Assets.minecraftFont12, container.items[itemNum + 1].Name, new Vector2((int)(container.X + 16), (int)(container.Y + 48)), Color.LightGray);
