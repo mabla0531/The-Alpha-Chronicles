@@ -53,7 +53,7 @@ namespace TAC
          
         public override void tick()
         {
-            if (new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, textureSubRect.Width, textureSubRect.Height).Contains(Mouse.GetState().Position) && Mouse.GetState().RightButton == ButtonState.Pressed && !ShowingInventory)
+            if (new Rectangle((int)(X - GameState.gameCameraOffset.X), (int)(Y - GameState.gameCameraOffset.Y), textureSubRect.Width, textureSubRect.Height).Contains(Mouse.GetState().Position) && Mouse.GetState().RightButton == ButtonState.Pressed && !ShowingInventory)
             {
                 ShowingInventory = true;
             }
@@ -66,12 +66,12 @@ namespace TAC
 
         public override void render(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.chests, new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, 16, 16), textureSubRect, Color.White);
+            spriteBatch.Draw(Assets.chests, new Rectangle((int)(X - GameState.gameCameraOffset.X), (int)(Y - GameState.gameCameraOffset.Y), 16, 16), textureSubRect, Color.White);
         }
 
         public override void postRender(SpriteBatch spriteBatch)
         {
-            if (new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, textureSubRect.Width, textureSubRect.Height).Contains(Mouse.GetState().Position) && !ShowingInventory)
+            if (new Rectangle((int)(X - GameState.gameCameraOffset.X), (int)(Y - GameState.gameCameraOffset.Y), textureSubRect.Width, textureSubRect.Height).Contains(Mouse.GetState().Position) && !ShowingInventory)
             {
                 tooltip.render(spriteBatch, Mouse.GetState().X + 16, Mouse.GetState().Y + 16);
             }

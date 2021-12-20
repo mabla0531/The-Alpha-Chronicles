@@ -81,12 +81,17 @@ namespace TAC
 
         public virtual void render(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.characters, new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, 32, 32), textureSubRect, Color.White);
+            spriteBatch.Draw(Assets.characters, new Rectangle((int)(X - GameState.gameCameraOffset.X), (int)(Y - GameState.gameCameraOffset.Y), 32, 32), textureSubRect, Color.White);
         }
 
         public virtual void postRender(SpriteBatch spriteBatch)
         {
 
+        }
+
+        public Vector2 getLocationAsVector2()
+        {
+            return new Vector2(X, Y);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace TAC
         {
             foreach (Tile t in tiles)
             {
-                spriteBatch.Draw(Assets.tileMap, new Rectangle(t.X - GameState.gameCameraOffsetX, t.Y - GameState.gameCameraOffsetY, t.Width, t.Height), t.TextureSource, Color.White);
+                spriteBatch.Draw(Assets.tileMap, new Rectangle((int)(t.X - GameState.gameCameraOffset.X), (int)(t.Y - GameState.gameCameraOffset.Y), t.Width, t.Height), t.TextureSource, Color.White);
             }
         }
 

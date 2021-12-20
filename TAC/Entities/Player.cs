@@ -67,13 +67,15 @@ namespace TAC
             idleFrame = new Rectangle(32, 0, 32, 32);
         }
 
-        public void addItem(Item i)
+        public bool addItem(Item i)
         {
             if (carryWeight + i.Weight <= carryCapacity)
             {
                 items.Add(i);
                 carryWeight += i.Weight;
+                return true;
             }
+            return false;
         }
 
         public void removeItem(Item i)
@@ -249,11 +251,11 @@ namespace TAC
         {
             if (moving)
             {
-                spriteBatch.Draw(Assets.characters, new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, 32, 32), currentAnimation.getCurrentFrame(), Color.White);
+                spriteBatch.Draw(Assets.characters, new Rectangle((int)(X - GameState.gameCameraOffset.X), (int)(Y - GameState.gameCameraOffset.Y), 32, 32), currentAnimation.getCurrentFrame(), Color.White);
             }
             else
             {
-                spriteBatch.Draw(Assets.characters, new Rectangle((int)X - GameState.gameCameraOffsetX, (int)Y - GameState.gameCameraOffsetY, 32, 32), idleFrame, Color.White);
+                spriteBatch.Draw(Assets.characters, new Rectangle((int)(X - GameState.gameCameraOffset.X), (int)(Y - GameState.gameCameraOffset.Y), 32, 32), idleFrame, Color.White);
             }
         }
     }
