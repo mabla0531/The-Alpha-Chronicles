@@ -17,12 +17,12 @@ namespace TAC
 
         //array of screen locations that tell where to draw item names, also plays a part in mouse cursor handling
         private Vector2[] itemDisplayPoints = {
-                new Vector2(20, 34),
-                new Vector2(20, 52),
-                new Vector2(20, 70),
-                new Vector2(20, 88),
-                new Vector2(20, 106)
-            };
+            new Vector2(20, 34),
+            new Vector2(20, 52),
+            new Vector2(20, 70),
+            new Vector2(20, 88),
+            new Vector2(20, 106)
+        };
 
         public StorageInventory(Chest c)
         {
@@ -71,11 +71,11 @@ namespace TAC
         public void render(SpriteBatch spriteBatch)
         {
             //main UI window
-            spriteBatch.Draw(Assets.drawRect, new Rectangle((new Vector2(16,  16) + container.getLocationAsVector2() - GameState.gameCameraOffset).ToPoint(), new Point(256, 256)), Color.DarkSlateGray);
+            spriteBatch.Draw(Assets.drawRect, new Rectangle((new Vector2(16, 16) + container.getLocationAsVector2() - GameState.gameCameraOffset).ToPoint(), new Point(256, 256)), Color.DarkSlateGray);
             //title bar
-            spriteBatch.Draw(Assets.drawRect, new Rectangle((new Vector2(16,  16) + container.getLocationAsVector2() - GameState.gameCameraOffset).ToPoint(), new Point(256, 16)), Color.LightGray);
+            spriteBatch.Draw(Assets.drawRect, new Rectangle((new Vector2(16, 16) + container.getLocationAsVector2() - GameState.gameCameraOffset).ToPoint(), new Point(256, 16)), Color.LightGray);
             //X button
-            spriteBatch.Draw(Assets.items,    new Rectangle((new Vector2(256, 16) + container.getLocationAsVector2() - GameState.gameCameraOffset).ToPoint(), new Point(16,  16)), new Rectangle(0, 288, 16, 16), Color.White);
+            spriteBatch.Draw(Assets.items, new Rectangle((new Vector2(256, 16) + container.getLocationAsVector2() - GameState.gameCameraOffset).ToPoint(), new Point(16, 16)), new Rectangle(0, 288, 16, 16), Color.White);
             //item bar
             spriteBatch.Draw(Assets.drawRect, new Rectangle((new Vector2(18, 126) + container.getLocationAsVector2() - GameState.gameCameraOffset).ToPoint(), new Point(252, 144)), Color.DarkCyan);
 

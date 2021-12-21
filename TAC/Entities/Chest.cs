@@ -36,14 +36,11 @@ namespace TAC
             X = x;
             Y = y;
 
-            items.Add(new Sword("NIGGER SLAYER 42069"));
-            items.Add(new Sword("WINGEDLEADER"));
             items.Add(new Sword("OBJ. 279(E)"));
-            items.Add(new Sword("FDSA"));
-            items.Add(new Sword("NIGGER SLAYER 42069"));
-            items.Add(new Sword("WINGEDLEADER"));
-            items.Add(new Sword("OBJ. 279(E)"));
-            items.Add(new Sword("FDSA"));
+            items.Add(new Helmet());
+            items.Add(new Chestplate());
+            items.Add(new Leggings());
+            items.Add(new Boots());
 
             tooltip = new Tooltip("Chest", items.Count + " items", "");
 
